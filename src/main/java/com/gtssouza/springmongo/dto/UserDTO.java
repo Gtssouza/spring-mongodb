@@ -5,6 +5,9 @@ import java.io.Serializable;
 import com.gtssouza.springmongo.domain.User;
 
 public class UserDTO implements Serializable{
+	
+	/*DTO - Data Transfer Object : é um objeto que tem o papel de carregar
+	 * dados das entidades de forma simples, podendo inclusive "projetar" apenas alguns dados da entidade original.*/
 
 	private static final long serialVersionUID = 1L;
 	private String id;
