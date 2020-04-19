@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +37,7 @@ public class UserResource {
 		User obj = service.findById(id);
 		return ResponseEntity.ok().body(new UserDTO(obj));
 	}
-	
+	/*-----------INSERE DADOS USUARIO-------------------------------------------------*/
 	@PostMapping()
 	public ResponseEntity<Void> insert(@RequestBody UserDTO objDto){
 		User obj = service.fromDTO(objDto);
@@ -48,10 +47,22 @@ public class UserResource {
 		/*Retorna uma resposta vazia com o cogido http 201*/
 	}
 	
+	/*-----------DELETA USUARIO--------------------------------------------------------*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable String id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	/*-----------ATUALIZA DADOS USUARIO-------------------------------------------------*/
+	@RequestMapping(value = "{/id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id){
+		User obj = service.fromDTO(objDto);
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
+	/*---------CRUD COMPLETO -----------------------------------------------------------------------------------------------*/
 
 }
